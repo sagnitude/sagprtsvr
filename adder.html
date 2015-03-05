@@ -86,7 +86,7 @@
 
     var ua = navigator.userAgent;
     setElementContent("ua", ua);
-//    setElementContent("ip", fetchExternalIp());
+   setElementContent("ip", "");
     fetchExternalIp();
     setElementContent("timestamp", (new Date()).toLocaleString());
     setElementContent("ticket", Request.QueryString("ticket"));
