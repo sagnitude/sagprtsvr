@@ -93,7 +93,7 @@
     setElementContent("activityId", Request.QueryString("activityid"));
     setElementContent("ibeaconid", Request.QueryString("mjr"));
     if(rd){
-        setElementContent("real_ip", rd.header["x-real-ip"]);
+        setElementContent("real_ip", rd.headers["x-real-ip"]);
     }
     
 
