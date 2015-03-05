@@ -11,18 +11,20 @@ app.use(multer());
 
 app.get("/", function(req, res){
 	console.log("GET root");
-	console.log(getPrettyJson(req));
+	// console.log(getPrettyJson(req));
 	res.send("OK");
 });
 
 app.get("/get", function(req, res){
-	console.log("GET got");
-	res.send(getPrettyJson(req));
+	// console.log("GET got");
+	console.log(req);
+	res.send("GET got");
 });
 
 app.post("/get", function(req, res){
-	console.log("POST got");
-	res.send(getPrettyJson(req));
+	// console.log("POST got");
+	console.log(req);
+	res.send("POST got");
 });
 
 var getPrettyJson = function(jsonObject) {
