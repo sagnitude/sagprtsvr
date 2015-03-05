@@ -37,12 +37,8 @@
             <td id="ibeaconid"></td>
         </tr>
         <tr>
-            <td>Remote</td>
-            <td id="remote"></td>
-        </tr>
-        <tr>
-          <td>iBeacon UUID</td>
-          <td id="ibeaconid"></td>
+            <td>Real IP</td>
+            <td id="real_ip"></td>
         </tr>
     </table>
 </div>
@@ -96,7 +92,9 @@
     setElementContent("ticket", Request.QueryString("ticket"));
     setElementContent("activityId", Request.QueryString("activityid"));
     setElementContent("ibeaconid", Request.QueryString("mjr"));
-    // console.log(rd);
+    if(rd){
+        setElementContent("real_ip", rd.header["x-real-ip"]);
+    }
     
 
 </script>
