@@ -17,14 +17,32 @@ app.get("/", function(req, res){
 
 app.get("/get", function(req, res){
 	// console.log("GET got");
-	console.log(req);
-	res.send(req);
+	var h = req.headers;
+	var p = req.params;
+	var q = req.query;
+	var rd = {
+		"headers": h,
+		"params": p,
+		"query": q
+	};
+	console.log(rd);
+	console.log("GET got");
+	res.send(getPrettyJson(rd));
 });
 
 app.post("/get", function(req, res){
 	// console.log("POST got");
-	console.log(req);
-	res.send("POST got");
+	var h = req.headers;
+	var p = req.params;
+	var q = req.query;
+	var rd = {
+		"headers": h,
+		"params": p,
+		"query": q
+	};
+	console.log(rd);
+	console.log("POST got");
+	res.send(getPrettyJson(rd));
 });
 
 var getPrettyJson = function(jsonObject) {
