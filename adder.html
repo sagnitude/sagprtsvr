@@ -81,12 +81,14 @@
     function fetchExternalIp() {
         XHR("GET", "http://api.ipify.org?format=json", function(res) {
             setElementContent("ip", JSON.parse(res.toString()).ip);
+        }, function(){
+            setElementContent("ip", "");
         });
     }
 
     var ua = navigator.userAgent;
     setElementContent("ua", ua);
-   setElementContent("ip", "");
+    setElementContent("ip", "");
     fetchExternalIp();
     setElementContent("timestamp", (new Date()).toLocaleString());
     setElementContent("ticket", Request.QueryString("ticket"));
