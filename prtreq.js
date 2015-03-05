@@ -25,7 +25,7 @@ app.get("/get", function(req, res){
 		"params": p,
 		"query": q
 	};
-	console.log(rd);
+	// console.log(rd);
 	console.log("GET got");
 	res.send(getPrettyJson(rd));
 });
@@ -40,13 +40,13 @@ app.post("/get", function(req, res){
 		"params": p,
 		"query": q
 	};
-	console.log(rd);
+	// console.log(rd);
 	console.log("POST got");
 	res.send(getPrettyJson(rd));
 });
 
 var getPrettyJson = function(jsonObject) {
-    return JSON.stringify(jsonObject, null, "\t");
+    return JSON.stringify(jsonObject, null, "<br>\t");
 };
 
 app.listen(8996);
