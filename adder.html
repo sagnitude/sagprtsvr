@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+</head>
+<body>
+<div>
+    <span id="ua_field"></span>
+    <table border="1px solid black" cellspacing="0px" style="border-collapse:collapse">
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>ActivityId</td>
+            <td id="activityId"></td>
+        </tr>
+        <tr>
+            <td>Ticket</td>
+            <td id="ticket"></td>
+        </tr>
+        <tr>
+            <td>TimeStamp</td>
+            <td id="timestamp"></td>
+        </tr>
+        <tr>
+            <td>IP</td>
+            <td id="ip"></td>
+        </tr>
+        <tr>
+            <td>UserAgent</td>
+            <td id="ua"></td>
+        </tr>
+        <tr>
+            <td>iBeacon UUID</td>
+            <td id="ibeaconid"></td>
+        </tr>
+        <tr>
+            <td>Remote</td>
+            <td id="remote"></td>
+        </tr>
+        <tr>
+          <td>iBeacon UUID</td>
+          <td id="ibeaconid"></td>
+        </tr>
+    </table>
+</div>
+<script type="application/javascript">
+    function setElementContent(id, ct) {
+        document.getElementById(id).innerHTML = ct;
+    }
+
+    Request = {
+        QueryString : function(item){
+            var svalue = location.search.match(new RegExp("[\?\&]" + item + "=([^\&]*)(\&?)","i"));
+            return svalue ? svalue[1] : svalue;
+        }
+    };
+
+    function XHR(method, url, cb, ecb){
+        var xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.XMLHTTP");
+        if (xhr) {
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState==4)
+                {// 4 = "loaded"
+                    if (xhr.status==200)
+                    {// 200 = OK
+                        // ...our code here...
+                        cb(xhr.response);
+                    }
+                    else
+                    {
+                        console.log("Problem retrieving XML data");
+//                        return null;
+                        ecb();
+                    }
+                }
+            }
+        }
+        xhr.open(method, url);
+        xhr.send(null);
+    }
+
+    function fetchExternalIp() {
+        XHR("GET", "http://api.ipify.org?format=json", function(res) {
+            setElementContent("ip", JSON.parse(res.toString()).ip);
+        });
+    }
+
+    var ua = navigator.userAgent;
+    setElementContent("ua", ua);
+//    setElementContent("ip", fetchExternalIp());
+    fetchExternalIp();
+    setElementContent("timestamp", (new Date()).toLocaleString());
+    setElementContent("ticket", Request.QueryString("ticket"));
+    setElementContent("activityId", Request.QueryString("activityid"));
+    setElementContent("ibeaconid", Request.QueryString("mjr"));
+    // console.log(rd);
+    
+
+</script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 var express = require('express');
 var methodOverride = require('method-override');
 var multer = require('multer');
+var fs = require("fs");
 
 var app = express();
 
@@ -25,7 +26,7 @@ app.get("/get", function(req, res){
 		"params": p,
 		"query": q
 	};
-	// console.log(rd);
+	console.log(getPrettyJson(rd));
 	console.log("GET got");
 	res.send(getPrettyJson(rd));
 });
@@ -40,9 +41,25 @@ app.post("/get", function(req, res){
 		"params": p,
 		"query": q
 	};
-	// console.log(rd);
+	console.log(getPrettyJson(rd));
 	console.log("POST got");
 	res.send(getPrettyJson(rd));
+});
+
+app.get("/add", function(req, res){
+	fs.readFile("./adder.html", function(err, html) {
+		var h = req.headers;
+		var p = req.params;
+		var q = req.query;
+		var rd = {
+			"headers": h,
+			"params": p,
+			"query": q
+		};
+		var jsonString = JSON.stringify(rd);
+		var predefine = "<script>var rd = "+jsonString+"</script>";
+		res.send(predefine + html);
+	});
 });
 
 var getPrettyJson = function(jsonObject) {
