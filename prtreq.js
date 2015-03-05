@@ -18,7 +18,7 @@ app.get("/", function(req, res){
 app.get("/get", function(req, res){
 	// console.log("GET got");
 	console.log(req);
-	res.send("GET got");
+	res.send(req);
 });
 
 app.post("/get", function(req, res){
